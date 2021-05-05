@@ -47,13 +47,20 @@ export class Pixel {
         }
     }
 
-    load(save?: PixelSave) {
+    loadLayer(parent: Pixel | Layer, save: LayerSave) {
+        const layer = create(save.type)
+        layer.load(save)
+        parent.layers.push(layer)
+        for (const layerSave of save.layers) {
+            this.loadLayer(layer, layerSave)
+        }
+    }
+
+    load(save: PixelSave) {
         this.name = save.name
         this.layers = []
         for (const layerSave of save.layers) {
-            const layer = create(layerSave)
-            layer.load(layerSave)
-            this.layers.push(layer)
+            this.loadLayer(this, layerSave)
         }
         this.animations.load(save.animations)
     }

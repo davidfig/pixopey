@@ -1,8 +1,8 @@
-import { Layer, LayerSave, LayerType } from './layer'
+import { LayerType, Layer } from './layer'
 import { Pixel } from './pixel'
 
-export function create(layerSave: LayerSave) {
-    switch (layerSave.type) {
+export function create(type: LayerType) {
+    switch (type) {
         case LayerType.layer:
             return new Layer()
 

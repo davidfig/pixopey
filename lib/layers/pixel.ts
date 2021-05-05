@@ -1,27 +1,26 @@
+import { Layer, LayerSave, LayerType } from './layer'
 import { Point, PointSave } from '../point'
 import { Color, ColorSave } from '../color'
-import { Layer, LayerSave, LayerType } from './layer'
-
-interface PixelPointSave {
-    point: PointSave
-    color: ColorSave
-}
-
-export interface PixelLayerSave extends LayerSave {
-    pixels: PixelPointSave[]
-}
 
 interface PixelPoint {
     point: Point
     color: Color
 }
 
+interface PixelPointSave {
+    point: PointSave
+    color: ColorSave
+}
+
+interface PixelLayerSave extends LayerSave {
+    pixels: PixelPointSave[]
+}
+
 export class Pixel extends Layer {
-    pixels: PixelPoint[]
+    pixels: PixelPoint[] = []
 
     constructor() {
         super(LayerType.pixel)
-        this.pixels = []
     }
 
     set(point: Point, color: Color) {

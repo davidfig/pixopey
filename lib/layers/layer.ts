@@ -1,4 +1,4 @@
-import { create } from './create'
+import { Pixel } from './pixel'
 
 export interface LayerSave {
     name: string
@@ -31,11 +31,12 @@ export class Layer {
         const index = this.layers.indexOf(layer)
         if (index === -1) {
             if (searchEntireTree) {
-                for (const layer of this.layers) {
-                    if (layer.remove(layer, true)) {
+                for (const search of this.layers) {
+                    if (search.remove(layer, true)) {
                         return layer
                     }
                 }
+                return null
             } else {
                 return null
             }
@@ -47,10 +48,6 @@ export class Layer {
 
     load(save: LayerSave) {
         this.name = save.name
-        for (const layerSave of save.layers) {
-            const layer = create(layerSave)
-            layer.load(layerSave)
-        }
     }
 
     save(): LayerSave {
