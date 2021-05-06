@@ -10,6 +10,7 @@ export enum LayerType {
     layer,
     pixel,
     ellipse,
+    line,
 }
 
 export class Layer {

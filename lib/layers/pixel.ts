@@ -32,6 +32,21 @@ export class Pixel extends Layer {
         }
     }
 
+    get(x: number | Point, y?: number): Color | null {
+        let point: Point
+        if (typeof x === 'number') {
+            point = new Point(x as number, y)
+        } else {
+            point = x as Point
+        }
+        const find = this.pixels.find((pp: PixelPoint) => pp.point.equals(point))
+        if (find) {
+            return find.color
+        } else {
+            return null
+        }
+    }
+
     save(): PixelLayerSave {
         const save: Partial<PixelLayerSave> = super.save()
         save.pixels = []

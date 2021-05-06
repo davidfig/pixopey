@@ -5,6 +5,12 @@ describe('color', () => {
         const color = new Color()
         expect(color.color).toEqual(0)
         expect(color.alpha).toEqual(1)
+        const color2 = new Color(1)
+        expect(color2.color).toEqual(1)
+        expect(color2.alpha).toEqual(1)
+        const color3 = new Color(1, 0.5)
+        expect(color3.color).toEqual(1)
+        expect(color3.alpha).toEqual(0.5)
     })
 
     it('.color, .alpha', () => {

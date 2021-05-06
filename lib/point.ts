@@ -4,6 +4,7 @@ export interface PointSave {
 }
 
 export class Point {
+    static ZERO: Point
     x: number
     y: number
 
@@ -15,6 +16,15 @@ export class Point {
             this.copy(x as Point)
         } else {
             this.x = x
+            this.y = y
+        }
+    }
+
+    set(x: number, y?: number) {
+        this.x = x
+        if (typeof y === 'undefined') {
+            this.y = x
+        } else {
             this.y = y
         }
     }
@@ -44,3 +54,5 @@ export class Point {
         this.y = save.y
     }
 }
+
+Point.ZERO = new Point()

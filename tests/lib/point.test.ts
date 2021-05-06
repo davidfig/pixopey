@@ -72,4 +72,14 @@ describe('point', () => {
         expect(point2.x).toEqual(point.x)
         expect(point2.y).toEqual(point.y)
     })
+
+    it('point.set()', () => {
+        const point = new Point(1, 2)
+        point.set(3, 4)
+        expect(point.x).toBe(3)
+        expect(point.y).toBe(4)
+        point.set(5)
+        expect(point.x).toBe(5)
+        expect(point.y).toBe(5)
+    })
 })

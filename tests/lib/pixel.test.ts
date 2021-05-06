@@ -58,12 +58,15 @@ describe('Pixel', () => {
         const layer2 = new Layer()
         layer2.name = 'test-layer-2'
         pixel.add(layer2)
+        const subLayer = new Layer()
+        layer.add(subLayer)
         const save = pixel.save()
 
         const pixel2 = new Pixel(save)
         expect(pixel2.name).toEqual(pixel.name)
         expect(pixel2.layers.length).toEqual(2)
-        expect(pixel2.layers[0].name).toEqual(pixel.layers[0].name)
-        expect(pixel2.layers[1].name).toEqual(pixel.layers[1].name)
+        expect(pixel2.layers[0]).toEqual(layer)
+        expect(pixel2.layers[1]).toEqual(layer2)
+        expect(pixel2.layers[0].layers[0]).toEqual(subLayer)
     })
 })

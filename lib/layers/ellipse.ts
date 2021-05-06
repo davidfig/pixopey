@@ -2,34 +2,34 @@ import { Layer, LayerSave, LayerType } from './layer'
 import { Point, PointSave } from '../point'
 
 export interface EllipseLayerSave extends LayerSave {
-    width: number
-    height: number
-    position: PointSave
+    radiusWidth: number
+    radiusHeight: number
+    center: PointSave
 }
 
 export class Ellipse extends Layer {
-    width: number
-    height: number
-    position: Point
+    radiusWidth: number
+    radiusHeight: number
+    center: Point
 
     constructor() {
         super(LayerType.ellipse)
-        this.width = 1
-        this.height = 1
-        this.position = new Point()
+        this.radiusWidth = 1
+        this.radiusHeight = 1
+        this.center = new Point()
     }
 
     save(): EllipseLayerSave {
         const save: Partial<EllipseLayerSave> = super.save()
-        save.width = this.width
-        save.height = this.height
-        save.position = this.position.save()
+        save.radiusWidth = this.radiusWidth
+        save.radiusHeight = this.radiusHeight
+        save.center = this.center.save()
         return save as EllipseLayerSave
     }
 
     load(load: EllipseLayerSave) {
-        this.width = load.width
-        this.height = load.height
-        this.position.load(load.position)
+        this.radiusWidth = load.radiusWidth
+        this.radiusHeight = load.radiusHeight
+        this.center.load(load.center)
     }
 }

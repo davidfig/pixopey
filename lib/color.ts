@@ -7,9 +7,9 @@ export class Color {
     color: number
     alpha: number
 
-    constructor() {
-        this.color = 0
-        this.alpha = 1
+    constructor(color = 0, alpha = 1) {
+        this.color = color
+        this.alpha = alpha
     }
 
     clone(): Color {
