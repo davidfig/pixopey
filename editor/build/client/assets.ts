@@ -3,8 +3,8 @@ import path from 'path'
 
 import { log } from '../log'
 
-const publicDir = 'public/'
-const title = 'Jobs Prototype'
+const publicDir = 'editor/public/'
+const title = 'Pixopey'
 
 const exceptions = ['index.html']
 

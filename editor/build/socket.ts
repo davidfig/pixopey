@@ -5,7 +5,7 @@ import { log } from './log'
 const RELOAD_PORT = 1235
 
 class Reload {
-    private client: WebSocket
+    private websocket: WebSocket
     private wss: WebSocket.Server
     private locked: number
 
@@ -13,7 +13,7 @@ class Reload {
         this.wss = new WebSocket.Server({
             port: RELOAD_PORT,
         })
-        this.wss.on('connection', (websocket: WebSocket) => this.client = websocket)
+        this.wss.on('connection', (websocket: WebSocket) => this.websocket = websocket)
         log(`[RELOAD] Live reload socket server running on port ${RELOAD_PORT}`)
         this.locked = 0
     }
@@ -26,7 +26,7 @@ class Reload {
         this.locked--
         if (this.locked === 0) {
             log('[RELOAD]', `Requesting live reload of connected client.`)
-            this.client.send()
+            this.websocket.send('')
         }
     }
 }

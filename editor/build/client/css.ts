@@ -23,7 +23,7 @@ async function css(dir: string) {
 
 export async function buildCss(dir: string, cache: string) {
     _css = ''
-    await css('code/')
+    await css('editor/code/')
     await fs.outputFile(`${dir}index${cache}.css`, _css)
-    log('BUILD', 'packaged css.', 0)
+    log('[BUILD]', 'packaged css.')
 }

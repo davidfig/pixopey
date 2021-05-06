@@ -2,8 +2,8 @@ import ts from 'typescript'
 import chokidar from 'chokidar'
 import { log } from './log'
 
-const ENTRY_POINTS = ['code/main.ts'] //, 'servers/dev.ts']
-const WATCH = ['code/**/*', 'servers/**/*', 'build/**/*']
+const ENTRY_POINTS = ['editor/code/main.ts']
+const WATCH = ['editor/code/**/*', 'lib/**/*']
 
 export function checkTypescript() {
     const tsWatch = chokidar.watch(WATCH, {

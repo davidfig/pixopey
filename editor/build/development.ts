@@ -3,9 +3,9 @@ import chokidar from 'chokidar'
 
 import { log } from './log'
 import { reload } from './socket'
-import { buildJs } from './js'
-import { buildCss } from './css'
-import { buildAssets } from './assets'
+import { buildJs } from './client/js'
+import { buildCss } from './client/css'
+import { buildAssets } from './client/assets'
 import { checkTypescript } from './typescript'
 
 let _cache: string,
@@ -17,21 +17,21 @@ async function watch() {
         pollInterval: 100
     }
 
-    const jsWatch = chokidar.watch(['code/**/*.?s', 'dummy-data/**/*', 'locale/**/*.?s'], { awaitWriteFinish })
+    const jsWatch = chokidar.watch(['lib/**/*.ts', 'editor/code/**/*.ts'], { awaitWriteFinish })
     jsWatch.on('change', async file => {
         reload.lock()
         log(`[BUILD] ${file} changed...`)
         await buildJs(_dir, _cache, false)
         reload.signal()
     })
-    const cssWatch = chokidar.watch('code/**/*.css', { awaitWriteFinish })
+    const cssWatch = chokidar.watch('editor/code/**/*.css', { awaitWriteFinish })
     cssWatch.on('change', async () => {
         reload.lock()
         await buildCss(_dir, _cache)
         reload.signal()
     })
 
-    const assets = chokidar.watch(['public/images', 'public/fonts', 'public/index.html'], { awaitWriteFinish })
+    const assets = chokidar.watch(['editor/public/**/*'], { awaitWriteFinish })
     assets.on('change', async () => {
         reload.lock()
         await buildAssets(_dir, _cache, true)
@@ -41,7 +41,7 @@ async function watch() {
 
 export async function development() {
     _cache = ''
-    _dir = 'www/'
+    _dir = 'editor/dist/'
     await fs.emptyDir(_dir)
     await buildAssets(_dir, _cache)
     await buildCss(_dir, _cache)

@@ -17,7 +17,7 @@ function roundTo(value: number, digits: number): number {
 }
 
 async function outputError(dir: string, cache: string, e: esbuild.BuildFailure) {
-    log('BUILD', 'error compiling javascript.', 1)
+    log('[BUILD]', 'error compiling javascript.')
     let s = ''
     if (!e.errors) {
         s += e.stack.replaceAll('\n', '<br>')
@@ -56,16 +56,18 @@ export async function buildJs(dir: string, cache: string, minify: boolean = fals
     const now = performance.now()
     try {
         await esbuild.build({
-            entryPoints: ['code/main.ts'],
+            entryPoints: ['editor/code/main.ts'],
             bundle: true,
+            inject: ['editor/build/client/live.js'],
             define: minify ? { 'window.RELEASE': 'false' } : { 'window.RELEASE': 'true' },
             outfile: `${dir}/index${cache}.js`,
             minify,
             sourcemap: !minify,
+            incremental: !minify,
         })
-        log('BUILD', `packaged javascript (${roundTo(performance.now() - now, 2)}ms).`, 0)
+        log('[BUILD]', `packaged javascript (${roundTo(performance.now() - now, 2)}ms).`)
     } catch (e) {
-        log('BUILD', e, 0)
+        log('[BUILD]', e)
         outputError(dir, cache, e)
     }
 }

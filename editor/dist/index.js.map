@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../build/client/live.js", "../code/main.ts"],
+  "sourcesContent": ["const PORT = 1235\nlet first = true\n\nfunction createSocket() {\n    const socket = new WebSocket(`ws://localhost:${PORT}`)\n    socket.addEventListener('message', () => window.location.reload())\n    socket.addEventListener('close', () => {\n        setTimeout(createSocket, 0)\n    })\n    socket.addEventListener('open', () => {\n        if (!first) {\n            window.location.reload()\n        } else {\n            first = false\n        }\n    })\n}\n\nwindow.addEventListener('load', () => {\n    createSocket()\n    console.log(`Live reload listening on port ${PORT}...`)\n})", "function start() {\n    console.log('hi3')\n}\n\nwindow.onload = start"],
+  "mappings": ";;AAAA,MAAM,OAAO;AACb,MAAI,QAAQ;AAEZ,0BAAwB;AACpB,UAAM,SAAS,IAAI,UAAU,kBAAkB;AAC/C,WAAO,iBAAiB,WAAW,MAAM,OAAO,SAAS;AACzD,WAAO,iBAAiB,SAAS,MAAM;AACnC,iBAAW,cAAc;AAAA;AAE7B,WAAO,iBAAiB,QAAQ,MAAM;AAClC,UAAI,CAAC,OAAO;AACR,eAAO,SAAS;AAAA,aACb;AACH,gBAAQ;AAAA;AAAA;AAAA;AAKpB,SAAO,iBAAiB,QAAQ,MAAM;AAClC;AACA,YAAQ,IAAI,iCAAiC;AAAA;;;ACpBjD,mBAAiB;AACb,YAAQ,IAAI;AAAA;AAGhB,SAAO,SAAS;",
+  "names": []
+}
