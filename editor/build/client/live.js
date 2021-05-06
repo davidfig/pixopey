@@ -1,11 +1,12 @@
 const PORT = 1235
+const RESTART_TIME = 200
 let first = true
 
 function createSocket() {
     const socket = new WebSocket(`ws://localhost:${PORT}`)
     socket.addEventListener('message', () => window.location.reload())
     socket.addEventListener('close', () => {
-        setTimeout(createSocket, 0)
+        setTimeout(createSocket, RESTART_TIME)
     })
     socket.addEventListener('open', () => {
         if (!first) {

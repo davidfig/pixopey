@@ -48,7 +48,7 @@ async function outputError(dir: string, cache: string, e: esbuild.BuildFailure) 
         document.body.style.width = 'auto'
         document.body.style.height = 'auto'
         document.body.innerHTML = '${he.encode(e.toString()).replaceAll('\n', '<br>')}<br><br>${s}'
-    });` + await fs.readFile('./build/live.js')
+    });` + await fs.readFile('editor/build/client/live.js')
     await fs.outputFile(`${dir}/index${cache}.js`, script)
 }
 

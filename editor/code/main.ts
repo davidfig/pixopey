@@ -1,5 +1,7 @@
+import { webgl } from './webgl'
+
 function start() {
-    console.log('hi3')
+    webgl()
 }
 
 window.onload = start
