@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "test": "jest",
     "editor": "node --no-warnings --loader ts-node/esm --experimental-specifier-resolution=node editor/build"
   },
   "author/": "",
