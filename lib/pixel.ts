@@ -23,7 +23,7 @@ export class Pixel {
         }
     }
 
-    add(layer: Layer, index: number = this.layers.length - 1): this {
+    add(layer: Layer, index: number = this.layers.length): this {
         this.layers.splice(index, 0, layer)
         return this
     }

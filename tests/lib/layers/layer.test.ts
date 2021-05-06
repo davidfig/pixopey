@@ -22,13 +22,13 @@ describe('Layer', () => {
         expect(layer.layers[0]).toBe(subLayer)
         const subLayer2 = new Layer()
         layer.add(subLayer2)
-        expect(layer.layers[0]).toBe(subLayer2)
-        expect(layer.layers[1]).toBe(subLayer)
+        expect(layer.layers[0]).toBe(subLayer)
+        expect(layer.layers[1]).toBe(subLayer2)
         const subLayer3 = new Layer()
         layer.add(subLayer3, 0)
         expect(layer.layers[0]).toBe(subLayer3)
-        expect(layer.layers[1]).toBe(subLayer2)
-        expect(layer.layers[2]).toBe(subLayer)
+        expect(layer.layers[1]).toBe(subLayer)
+        expect(layer.layers[2]).toBe(subLayer2)
     })
 
     it('remove()', () => {
